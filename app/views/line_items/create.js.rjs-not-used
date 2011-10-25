@@ -1,0 +1,8 @@
+# Does not work in RAILS 3.1 so using create.js.erb instead AJAXitise the cart
+page.replace_html('cart', render(@cart))
+#START_HIGHLIGHT
+
+page[:current_item].visual_effect :highlight,
+                                  :startcolor => "#88ff88",
+                                  :endcolor => "#114411"
+#END_HIGHLIGHT

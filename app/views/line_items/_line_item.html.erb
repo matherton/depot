@@ -1,0 +1,16 @@
+<!-- MA - check to see if line item being rendered is current line item and if it is add a id of current_item -->  
+<% if line_item == @current_item %>
+<tr id="current_item">
+<% else %>
+<tr>
+<% end %>
+  <td><%= line_item.quantity %>&times;</td>
+  <td><%= line_item.product.title %></td>
+  <td class="item_price"><%= number_to_currency(line_item.total_price) %></td>
+  <!-- 17-10-11 Here is the link to delete an item from the cart -->
+  <!-- 18-10-11 Need to alter this so just deletes 1 item if duplicate items are in the cart -->
+  <!-- 3. ad link to view which uses the decrement method defined in line_items_controller.rb-->
+  <td><%= link_to 'x', decrement_line_item_path(line_item), :remote => true %></td>
+</tr>
+<!-- 24/10/11 MA I think display the above but is using helpers instead of all the tables - page 185 -->
+<%= sprintf("%2d x %s", line_item.quantity, truncate(line_item.product.title, :length => 50)) %>

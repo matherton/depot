@@ -1,0 +1,21 @@
+<!-- This is the view template and produces an HTML result - % signify ruby code in a view %= output of ruby code to view. Use of sanitize allows adding HTML stylings but opens up potential security hole -->
+<% if notice %>
+<p id="notice"><%= notice %></p> 
+<% end %>
+ 
+<h1>Your Pragmatic Catalog</h1> 
+
+<% @products.each do |product| %>
+  <div class="entry"> 
+    <!-- MA the line below adds a link to the book image i.e. link_to method outputs href tag,  CSS class and title, link to cart add adds book with method post -->
+    <%= link_to image_tag(product.image_url, {:class => "image_link", :title => "add to cart"}), line_items_path(:product_id => product), {:remote => true, :method => :post} %>
+    <h3><%= product.title %></h3> 
+    <%= sanitize(product.description) %>
+    <div class="price_line"> 
+      <span class="price"><%= number_to_currency(product.price) %></span>
+      <!-- By adding: "remote => true" parameter to the end of button_to call we turn this into an AJAX request
+      -->
+      <%= button_to 'add to cart', line_items_path(:product_id => product), :remote => true %>
+    </div> 
+  </div> 
+<% end %>

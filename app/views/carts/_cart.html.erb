@@ -1,0 +1,21 @@
+<!-- This is basically our carts/show.html.erb template but using cart instead of @cart. (Note that it’s OK for a partial to invoke other partials.) to avoid repeating myself I have replaced the code in show.html.erb
+that cause the partial to be rendered -->
+<!-- MA cannot use create.js.rjs in RAILS 3.1 Scott mentioned moustache as alternative (uses curly brackets) - used code on page 150 so cart just appears instead of nice AJAX effect -->
+<% unless cart.line_items.empty? %>
+<div class='cart_title'>Your Cart</div> 
+<table>
+  <!-- MA - this is a partial to place the cart in the sidebar -->
+  <%= render(cart.line_items) %>
+  <tr class='total_line'> 
+    <td colspan='2'>Total</td> 
+    <td class='total_cell'><%= number_to_currency(cart.total_price) %></td>
+  </tr> 
+</table>
+<!-- Adds a checkout button to the cart with a new_order_path using the method get so that it gets all the current items -->
+<!-- MA disable the checkout button when on checkout page NOTE got the value from rake routes in terminal -->
+  <%= button_to 'Checkout', new_order_path, :disabled => true %>
+<% else %>
+  <%= button_to 'Checkout', new_order_path, :method => :get %>
+<% end %>
+<!-- Adds a empty cart button to the shopping cart so you completely empty the cart-->
+<%= button_to 'Empty cart', cart, :method => :delete, :confirm => 'Are you sure?' %>

@@ -1,0 +1,6 @@
+// Chris did this the old way using jquery (as he would in rails 3 - works in any version) instead of create.js.rjs like in the book for 3.0.5 but this does not work in 3.1
+$('#cart').html("<%= escape_javascript(render(@cart)) %>");
+
+// MA this gets rid of the thanks for your order notice when the catalog page is refreshed but does not work in this version of Rails - page 172 
+// It causes the AJAX functionality of the cart to not work and the page has to be reloaded to update the cart
+//page.select("#notice").each { |notice| notice.hide }
