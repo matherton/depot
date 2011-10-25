@@ -51654,3 +51654,696 @@ Completed 200 OK in 80ms (Views: 13.5ms | ActiveRecord: 1.8ms)
   [1m[36m (1.3ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20111011143935')[0m
   [1m[35m (1.5ms)[0m  INSERT INTO "schema_migrations" (version) VALUES ('20111011151739')
   [1m[36m (1.5ms)[0m  [1mINSERT INTO "schema_migrations" (version) VALUES ('20111019115659')[0m
+
+
+Started GET "/" for 127.0.0.1 at 2011-10-25 16:05:15 +0100
+  Processing by StoreController#index as HTML
+  [1m[36mProduct Load (0.4ms)[0m  [1mSELECT "products".* FROM "products" ORDER BY title[0m
+  [1m[35mSQL (68.5ms)[0m  INSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", Tue, 25 Oct 2011 15:05:16 UTC +00:00], ["updated_at", Tue, 25 Oct 2011 15:05:16 UTC +00:00]]
+Rendered store/index.html.erb within layouts/application (115.6ms)
+ERROR: compiling _app_views_carts__cart_html_erb___1772594466975218455_2167714320 RAISED /Users/mark/depot/app/views/carts/_cart.html.erb:18: syntax error, unexpected tCONSTANT, expecting ')'
+....append= ( #button_to 'Checkout', new_order_path, :disabled ...
+...                               ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:19: syntax error, unexpected tIDENTIFIER, expecting ')'
+...utput_buffer.safe_concat(' took this out as was causing git ...
+...                               ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:19: syntax error, unexpected '\n', expecting keyword_do_LAMBDA or tLAMBEG
+/Users/mark/depot/app/views/carts/_cart.html.erb:21: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+<!-- Adds a checkout button to the cart ...
+           ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:21: syntax error, unexpected '\n', expecting keyword_do_LAMBDA or tLAMBEG
+/Users/mark/depot/app/views/carts/_cart.html.erb:23: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+<!-- Adds a empty cart button to the sho...
+           ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:23: syntax error, unexpected '\n', expecting keyword_do_LAMBDA or tLAMBEG
+/Users/mark/depot/app/views/carts/_cart.html.erb:24: syntax error, unexpected tCONSTANT, expecting ')'
+...ffer.append= ( button_to 'Empty cart', cart, :method => :del...
+...                               ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:24: syntax error, unexpected tCONSTANT, expecting ')'
+...od => :delete, :confirm => 'Are you sure?' );@output_buffer....
+...                               ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:25: unterminated string meets end of file
+/Users/mark/depot/app/views/carts/_cart.html.erb:25: syntax error, unexpected $end, expecting ')'
+Function body:           def _app_views_carts__cart_html_erb___1772594466975218455_2167714320(local_assigns, output_buffer)
+            _old_virtual_path, @virtual_path = @virtual_path, "carts/_cart";_old_output_buffer = @output_buffer;cart = local_assigns[:cart];;@output_buffer = output_buffer || ActionView::OutputBuffer.new;@output_buffer.safe_concat('<!-- This is basically our carts/show.html.erb template but using cart instead of @cart. (Note that it’s OK for a partial to invoke other partials.) to avoid repeating myself I have replaced the code in show.html.erb
+that cause the partial to be rendered -->
+<!-- MA cannot use create.js.rjs in RAILS 3.1 Scott mentioned moustache as alternative (uses curly brackets) - used code on page 150 so cart just appears instead of nice AJAX effect -->
+'); unless cart.line_items.empty? 
+@output_buffer.safe_concat('<div class=\'cart_title\'>Your Cart</div> 
+<table>
+  <!-- MA - this is a partial to place the cart in the sidebar -->
+  ');@output_buffer.append= ( render(cart.line_items) );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('  <tr class=\'total_line\'> 
+    <td colspan=\'2\'>Total</td> 
+    <td class=\'total_cell\'>');@output_buffer.append= ( number_to_currency(cart.total_price) );@output_buffer.safe_concat('</td>
+  </tr> 
+</table>
+<!-- MA disable the checkout button when on checkout page NOTE got the value from rake routes in terminal 
+');
+@output_buffer.safe_concat('  ');@output_buffer.append= (# button_to 'Checkout', new_order_path, :method => :get );@output_buffer.safe_concat('
+'); #else 
+@output_buffer.safe_concat('  ');@output_buffer.append= ( #button_to 'Checkout', new_order_path, :disabled => true );@output_buffer.safe_concat('
+'); #end ;@output_buffer.safe_concat(' took this out as was causing git conflicts -->
+
+<!-- Adds a checkout button to the cart with a new_order_path using the method get so that it gets all the current items -->
+
+<!-- Adds a empty cart button to the shopping cart so you completely empty the cart-->
+');@output_buffer.append= ( button_to 'Empty cart', cart, :method => :delete, :confirm => 'Are you sure?' );@output_buffer.safe_concat('
+');@output_buffer.to_s
+          ensure
+            @virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:282:in `module_eval'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:282:in `compile'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:190:in `compile!'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:143:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:55:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:142:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/partial_renderer.rb:256:in `render_partial'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/partial_renderer.rb:228:in `block (2 levels) in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/abstract_renderer.rb:33:in `block in instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:53:in `block in instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:53:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/abstract_renderer.rb:33:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/partial_renderer.rb:227:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/abstract_renderer.rb:22:in `wrap_formats'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/partial_renderer.rb:219:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/renderer.rb:41:in `render_partial'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/helpers/rendering_helper.rb:27:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/prototype-rails-0.3.1/lib/prototype-rails/rendering.rb:8:in `render_with_update'
+/Users/mark/depot/app/views/layouts/application.html.erb:23:in `_app_views_layouts_application_html_erb__3545821880943374599_2174527740'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:144:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:55:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:142:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/template_renderer.rb:52:in `render_with_layout'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/template_renderer.rb:38:in `render_template'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/template_renderer.rb:12:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/abstract_renderer.rb:22:in `wrap_formats'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/template_renderer.rb:9:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/renderer.rb:36:in `render_template'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/renderer.rb:17:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/rendering.rb:120:in `_render_template'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/streaming.rb:250:in `_render_template'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/rendering.rb:114:in `render_to_body'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/renderers.rb:30:in `render_to_body'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/compatibility.rb:43:in `render_to_body'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/rendering.rb:99:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/rendering.rb:16:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/core_ext/benchmark.rb:5:in `block in ms'
+/Users/mark/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/benchmark.rb:310:in `realtime'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:40:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.1.0.rc8/lib/active_record/railties/controller_runtime.rb:24:in `cleanup_view_runtime'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:39:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/base.rb:167:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/rendering.rb:10:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:416:in `_run__2682275704741638409__process_action__1001465909615364642__callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:386:in `_run_process_action_callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:81:in `run_callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/callbacks.rb:17:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/rescue.rb:17:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:53:in `block in instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:53:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/params_wrapper.rb:201:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.1.0.rc8/lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/base.rb:121:in `process'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/rendering.rb:45:in `process'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal.rb:193:in `dispatch'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal.rb:236:in `block in action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/routing/route_set.rb:65:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/routing/route_set.rb:65:in `dispatch'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/routing/route_set.rb:29:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/route_set.rb:152:in `block in call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/code_generation.rb:96:in `block in recognize'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/code_generation.rb:75:in `optimized_each'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/code_generation.rb:95:in `recognize'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/route_set.rb:141:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/routing/route_set.rb:531:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/etag.rb:23:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/conditionalget.rb:25:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/head.rb:14:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/flash.rb:243:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/session/abstract/id.rb:195:in `context'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/session/abstract/id.rb:190:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/cookies.rb:326:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.1.0.rc8/lib/active_record/query_cache.rb:62:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.1.0.rc8/lib/active_record/connection_adapters/abstract/connection_pool.rb:477:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:392:in `_run_call_callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:81:in `run_callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/reloader.rb:68:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/sendfile.rb:101:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.1.0.rc8/lib/rails/rack/logger.rb:13:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/methodoverride.rb:24:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/runtime.rb:17:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/lock.rb:15:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/static.rb:53:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.1.0.rc8/lib/rails/engine.rb:455:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.1.0.rc8/lib/rails/rack/content_length.rb:16:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.1.0.rc8/lib/rails/rack/log_tailer.rb:14:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/handler/webrick.rb:59:in `service'
+/Users/mark/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+/Users/mark/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+/Users/mark/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+Rendered carts/_cart.html.erb (22.2ms)
+Completed 500 Internal Server Error in 618ms
+
+ActionView::Template::Error (/Users/mark/depot/app/views/carts/_cart.html.erb:18: syntax error, unexpected tCONSTANT, expecting ')'
+....append= ( #button_to 'Checkout', new_order_path, :disabled ...
+...                               ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:19: syntax error, unexpected tIDENTIFIER, expecting ')'
+...utput_buffer.safe_concat(' took this out as was causing git ...
+...                               ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:19: syntax error, unexpected '\n', expecting keyword_do_LAMBDA or tLAMBEG
+/Users/mark/depot/app/views/carts/_cart.html.erb:21: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+<!-- Adds a checkout button to the cart ...
+           ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:21: syntax error, unexpected '\n', expecting keyword_do_LAMBDA or tLAMBEG
+/Users/mark/depot/app/views/carts/_cart.html.erb:23: syntax error, unexpected tIDENTIFIER, expecting keyword_do or '{' or '('
+<!-- Adds a empty cart button to the sho...
+           ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:23: syntax error, unexpected '\n', expecting keyword_do_LAMBDA or tLAMBEG
+/Users/mark/depot/app/views/carts/_cart.html.erb:24: syntax error, unexpected tCONSTANT, expecting ')'
+...ffer.append= ( button_to 'Empty cart', cart, :method => :del...
+...                               ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:24: syntax error, unexpected tCONSTANT, expecting ')'
+...od => :delete, :confirm => 'Are you sure?' );@output_buffer....
+...                               ^
+/Users/mark/depot/app/views/carts/_cart.html.erb:25: unterminated string meets end of file
+/Users/mark/depot/app/views/carts/_cart.html.erb:25: syntax error, unexpected $end, expecting ')'):
+    15: <%# if params[:action] == 'new' && params[:controller] == 'orders'%> 
+    16:   <%=# button_to 'Checkout', new_order_path, :method => :get %>
+    17: <% #else %>
+    18:   <%= #button_to 'Checkout', new_order_path, :disabled => true %>
+    19: <% #end %> took this out as was causing git conflicts -->
+    20: 
+    21: <!-- Adds a checkout button to the cart with a new_order_path using the method get so that it gets all the current items -->
+  app/views/layouts/application.html.erb:23:in `_app_views_layouts_application_html_erb__3545821880943374599_2174527740'
+
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.0ms)
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.7ms)
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (4.3ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-10-25 16:07:41 +0100
+  Processing by StoreController#index as HTML
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" ORDER BY title[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", Tue, 25 Oct 2011 15:07:41 UTC +00:00], ["updated_at", Tue, 25 Oct 2011 15:07:41 UTC +00:00]]
+Rendered store/index.html.erb within layouts/application (10.6ms)
+ERROR: compiling _app_views_carts__cart_html_erb___1772594466975218455_2166026140 RAISED /Users/mark/depot/app/views/carts/_cart.html.erb:20: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/mark/depot/app/views/carts/_cart.html.erb:22: syntax error, unexpected $end, expecting keyword_end
+Function body:           def _app_views_carts__cart_html_erb___1772594466975218455_2166026140(local_assigns, output_buffer)
+            _old_virtual_path, @virtual_path = @virtual_path, "carts/_cart";_old_output_buffer = @output_buffer;cart = local_assigns[:cart];;@output_buffer = output_buffer || ActionView::OutputBuffer.new;@output_buffer.safe_concat('<!-- This is basically our carts/show.html.erb template but using cart instead of @cart. (Note that it’s OK for a partial to invoke other partials.) to avoid repeating myself I have replaced the code in show.html.erb
+that cause the partial to be rendered -->
+<!-- MA cannot use create.js.rjs in RAILS 3.1 Scott mentioned moustache as alternative (uses curly brackets) - used code on page 150 so cart just appears instead of nice AJAX effect -->
+'); unless cart.line_items.empty? 
+@output_buffer.safe_concat('<div class=\'cart_title\'>Your Cart</div> 
+<table>
+  <!-- MA - this is a partial to place the cart in the sidebar -->
+  ');@output_buffer.append= ( render(cart.line_items) );@output_buffer.safe_concat('
+');@output_buffer.safe_concat('  <tr class=\'total_line\'> 
+    <td colspan=\'2\'>Total</td> 
+    <td class=\'total_cell\'>');@output_buffer.append= ( number_to_currency(cart.total_price) );@output_buffer.safe_concat('</td>
+  </tr> 
+</table>
+
+<!-- Adds a checkout button to the cart with a new_order_path using the method get so that it gets all the current items -->
+
+<!-- Adds a empty cart button to the shopping cart so you completely empty the cart-->
+');@output_buffer.append= ( button_to 'Empty cart', cart, :method => :delete, :confirm => 'Are you sure?' );@output_buffer.safe_concat('
+');@output_buffer.to_s
+          ensure
+            @virtual_path, @output_buffer = _old_virtual_path, _old_output_buffer
+          end
+Backtrace: /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:282:in `module_eval'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:282:in `compile'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:190:in `compile!'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:143:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:55:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:142:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/partial_renderer.rb:256:in `render_partial'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/partial_renderer.rb:228:in `block (2 levels) in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/abstract_renderer.rb:33:in `block in instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:53:in `block in instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:53:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/abstract_renderer.rb:33:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/partial_renderer.rb:227:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/abstract_renderer.rb:22:in `wrap_formats'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/partial_renderer.rb:219:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/renderer.rb:41:in `render_partial'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/helpers/rendering_helper.rb:27:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/prototype-rails-0.3.1/lib/prototype-rails/rendering.rb:8:in `render_with_update'
+/Users/mark/depot/app/views/layouts/application.html.erb:23:in `_app_views_layouts_application_html_erb__3545821880943374599_2174527740'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:144:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:55:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/template.rb:142:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/template_renderer.rb:52:in `render_with_layout'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/template_renderer.rb:38:in `render_template'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/template_renderer.rb:12:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/abstract_renderer.rb:22:in `wrap_formats'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/template_renderer.rb:9:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/renderer.rb:36:in `render_template'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_view/renderer/renderer.rb:17:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/rendering.rb:120:in `_render_template'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/streaming.rb:250:in `_render_template'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/rendering.rb:114:in `render_to_body'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/renderers.rb:30:in `render_to_body'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/compatibility.rb:43:in `render_to_body'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/rendering.rb:99:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/rendering.rb:16:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:40:in `block (2 levels) in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/core_ext/benchmark.rb:5:in `block in ms'
+/Users/mark/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/benchmark.rb:310:in `realtime'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/core_ext/benchmark.rb:5:in `ms'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:40:in `block in render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:78:in `cleanup_view_runtime'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.1.0.rc8/lib/active_record/railties/controller_runtime.rb:24:in `cleanup_view_runtime'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:39:in `render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/implicit_render.rb:10:in `default_render'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/implicit_render.rb:5:in `send_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/base.rb:167:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/rendering.rb:10:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/callbacks.rb:18:in `block in process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:416:in `_run__2682275704741638409__process_action__1001465909615364642__callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:386:in `_run_process_action_callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:81:in `run_callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/callbacks.rb:17:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/rescue.rb:17:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:30:in `block in process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:53:in `block in instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications/instrumenter.rb:21:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/notifications.rb:53:in `instrument'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/instrumentation.rb:29:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/params_wrapper.rb:201:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.1.0.rc8/lib/active_record/railties/controller_runtime.rb:18:in `process_action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/base.rb:121:in `process'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/abstract_controller/rendering.rb:45:in `process'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal.rb:193:in `dispatch'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal/rack_delegation.rb:14:in `dispatch'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_controller/metal.rb:236:in `block in action'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/routing/route_set.rb:65:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/routing/route_set.rb:65:in `dispatch'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/routing/route_set.rb:29:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/route_set.rb:152:in `block in call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/code_generation.rb:96:in `block in recognize'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/code_generation.rb:75:in `optimized_each'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/code_generation.rb:95:in `recognize'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-mount-0.8.3/lib/rack/mount/route_set.rb:141:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/routing/route_set.rb:531:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/best_standards_support.rb:17:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/etag.rb:23:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/conditionalget.rb:25:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/head.rb:14:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/params_parser.rb:21:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/flash.rb:243:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/session/abstract/id.rb:195:in `context'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/session/abstract/id.rb:190:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/cookies.rb:326:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.1.0.rc8/lib/active_record/query_cache.rb:62:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activerecord-3.1.0.rc8/lib/active_record/connection_adapters/abstract/connection_pool.rb:477:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/callbacks.rb:29:in `block in call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:392:in `_run_call_callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/callbacks.rb:81:in `run_callbacks'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/callbacks.rb:28:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/reloader.rb:68:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/sendfile.rb:101:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/remote_ip.rb:48:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/show_exceptions.rb:47:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.1.0.rc8/lib/rails/rack/logger.rb:13:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/methodoverride.rb:24:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/runtime.rb:17:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/activesupport-3.1.0.rc8/lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/lock.rb:15:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/static.rb:53:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.1.0.rc8/lib/rails/engine.rb:455:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.1.0.rc8/lib/rails/rack/content_length.rb:16:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/railties-3.1.0.rc8/lib/rails/rack/log_tailer.rb:14:in `call'
+/Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/rack-1.3.2/lib/rack/handler/webrick.rb:59:in `service'
+/Users/mark/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:111:in `service'
+/Users/mark/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/httpserver.rb:70:in `run'
+/Users/mark/.rvm/rubies/ruby-1.9.2-p290/lib/ruby/1.9.1/webrick/server.rb:183:in `block in start_thread'
+Rendered carts/_cart.html.erb (0.7ms)
+Completed 500 Internal Server Error in 42ms
+
+ActionView::Template::Error (/Users/mark/depot/app/views/carts/_cart.html.erb:20: syntax error, unexpected keyword_ensure, expecting keyword_end
+/Users/mark/depot/app/views/carts/_cart.html.erb:22: syntax error, unexpected $end, expecting keyword_end):
+    17: <!-- Adds a empty cart button to the shopping cart so you completely empty the cart-->
+    18: <%= button_to 'Empty cart', cart, :method => :delete, :confirm => 'Are you sure?' %>
+  app/views/layouts/application.html.erb:23:in `_app_views_layouts_application_html_erb__3545821880943374599_2174527740'
+
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_trace.erb (1.1ms)
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (0.8ms)
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/template_error.erb within rescues/layout (3.9ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+  Processing by StoreController#index as HTML
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" ORDER BY title[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)  [["created_at", Tue, 25 Oct 2011 15:11:25 UTC +00:00], ["updated_at", Tue, 25 Oct 2011 15:11:25 UTC +00:00]]
+Rendered store/index.html.erb within layouts/application (10.5ms)
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = 91[0m
+Rendered collection (0.0ms)
+Rendered carts/_cart.html.erb (114.3ms)
+Completed 200 OK in 155ms (Views: 133.2ms | ActiveRecord: 1.5ms)
+
+
+Started GET "/assets/scaffold.css" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /scaffold.css - 404 Not Found (2ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/scaffold.css"):
+  
+
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.5ms)
+
+
+Started GET "/assets/depot.css?body=1" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /depot.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /jquery.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/carts.js?body=1" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /carts.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/line_items.js?body=1" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /line_items.js - 304 Not Modified (26ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /jquery_ujs.js - 304 Not Modified (3ms)
+
+
+Started GET "/assets/orders.js?body=1" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /orders.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/products.js?body=1" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /products.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/store.js?body=1" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /store.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-10-25 16:11:25 +0100
+Served asset /logo.png - 304 Not Modified (32ms)
+
+
+Started GET "/" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+  Processing by StoreController#index as HTML
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" ORDER BY title
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT 1[0m  [["id", 91]]
+Rendered store/index.html.erb within layouts/application (37.4ms)
+  [1m[35mLineItem Load (0.1ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = 91
+Rendered collection (0.0ms)
+Rendered carts/_cart.html.erb (8.1ms)
+Completed 200 OK in 74ms (Views: 56.1ms | ActiveRecord: 1.2ms)
+
+
+Started GET "/assets/depot.css?body=1" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /depot.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/scaffold.css" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /scaffold.css - 404 Not Found (2ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/scaffold.css"):
+  
+
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.5ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/carts.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /carts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/line_items.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /line_items.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/orders.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /orders.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/products.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /products.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /store.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-10-25 16:12:33 +0100
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started GET "/orders/new" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+  Processing by OrdersController#new as HTML
+  [1m[36mCart Load (0.1ms)[0m  [1mSELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT 1[0m  [["id", 91]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "line_items" WHERE "line_items"."cart_id" = 91
+Redirected to http://localhost:3000/
+Completed 302 Found in 43ms
+
+
+Started GET "/" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+  Processing by StoreController#index as HTML
+  [1m[36mProduct Load (0.2ms)[0m  [1mSELECT "products".* FROM "products" ORDER BY title[0m
+  [1m[35mCart Load (1.0ms)[0m  SELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT 1  [["id", 91]]
+Rendered store/index.html.erb within layouts/application (9.9ms)
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = 91[0m
+Rendered collection (0.0ms)
+Rendered carts/_cart.html.erb (8.1ms)
+Completed 200 OK in 75ms (Views: 57.0ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/assets/scaffold.css" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /scaffold.css - 404 Not Found (2ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/scaffold.css"):
+  
+
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.5ms)
+
+
+Started GET "/assets/depot.css?body=1" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /depot.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/carts.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /carts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/line_items.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /line_items.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/orders.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /orders.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/products.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /products.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /store.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-10-25 16:12:36 +0100
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started POST "/line_items?product_id=9" for 127.0.0.1 at 2011-10-25 16:12:40 +0100
+  Processing by LineItemsController#create as JS
+  Parameters: {"authenticity_token"=>"PZQYYmoZFKHnd8jylEUIXflatLpsJykxUBfh8TKpQVs=", "product_id"=>"9"}
+  [1m[35mCart Load (0.1ms)[0m  SELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT 1  [["id", 91]]
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = ? ORDER BY title LIMIT 1[0m  [["id", "9"]]
+  [1m[35mLineItem Load (0.2ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = 91 AND "line_items"."product_id" = 9 LIMIT 1
+  [1m[36mSQL (0.6ms)[0m  [1mINSERT INTO "line_items" ("cart_id", "created_at", "order_id", "product_id", "quantity", "updated_at") VALUES (?, ?, ?, ?, ?, ?)[0m  [["cart_id", 91], ["created_at", Tue, 25 Oct 2011 15:12:40 UTC +00:00], ["order_id", nil], ["product_id", 9], ["quantity", 1], ["updated_at", Tue, 25 Oct 2011 15:12:40 UTC +00:00]]
+  [1m[35mLineItem Load (0.2ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = 91
+  [1m[36mProduct Load (0.2ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 9 ORDER BY title LIMIT 1[0m
+Rendered line_items/_line_item.html.erb (42.7ms)
+Rendered carts/_cart.html.erb (46.8ms)
+Rendered line_items/create.js.erb (48.0ms)
+Completed 200 OK in 138ms (Views: 53.9ms | ActiveRecord: 2.0ms)
+
+
+Started GET "/orders/new" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+  Processing by OrdersController#new as HTML
+  [1m[35mCart Load (0.1ms)[0m  SELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT 1  [["id", 91]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "line_items" WHERE "line_items"."cart_id" = 91[0m
+Rendered orders/_form.html.erb (8.3ms)
+Rendered orders/new.html.erb within layouts/application (9.5ms)
+  [1m[35mLineItem Load (0.1ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = 91
+  [1m[36mProduct Load (0.1ms)[0m  [1mSELECT "products".* FROM "products" WHERE "products"."id" = 9 ORDER BY title LIMIT 1[0m
+Rendered line_items/_line_item.html.erb (19.0ms)
+Rendered carts/_cart.html.erb (54.0ms)
+Completed 200 OK in 114ms (Views: 72.2ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/scaffold.css" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /scaffold.css - 404 Not Found (2ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/scaffold.css"):
+  
+
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.6ms)
+
+
+Started GET "/assets/depot.css?body=1" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /depot.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/carts.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /carts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/line_items.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /line_items.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/orders.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /orders.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /store.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/products.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /products.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-10-25 16:12:42 +0100
+Served asset /logo.png - 304 Not Modified (0ms)
+
+
+Started DELETE "/carts/91" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+  Processing by CartsController#destroy as HTML
+  Parameters: {"authenticity_token"=>"PZQYYmoZFKHnd8jylEUIXflatLpsJykxUBfh8TKpQVs=", "id"=>"91"}
+  [1m[35mCart Load (0.1ms)[0m  SELECT "carts".* FROM "carts" WHERE "carts"."id" = ? LIMIT 1  [["id", 91]]
+  [1m[36mLineItem Load (0.1ms)[0m  [1mSELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = 91[0m
+  [1m[35mSQL (136.6ms)[0m  DELETE FROM "line_items" WHERE "line_items"."id" = ?  [["id", 171]]
+  [1m[36mSQL (0.1ms)[0m  [1mDELETE FROM "carts" WHERE "carts"."id" = ?[0m  [["id", 91]]
+Redirected to http://localhost:3000/
+Completed 302 Found in 155ms
+
+
+Started GET "/" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+  Processing by StoreController#index as HTML
+  [1m[35mProduct Load (0.1ms)[0m  SELECT "products".* FROM "products" ORDER BY title
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "carts" ("created_at", "updated_at") VALUES (?, ?)[0m  [["created_at", Tue, 25 Oct 2011 15:12:49 UTC +00:00], ["updated_at", Tue, 25 Oct 2011 15:12:49 UTC +00:00]]
+Rendered store/index.html.erb within layouts/application (10.1ms)
+  [1m[35mLineItem Load (0.1ms)[0m  SELECT "line_items".* FROM "line_items" WHERE "line_items"."cart_id" = 92
+Rendered collection (0.0ms)
+Rendered carts/_cart.html.erb (7.7ms)
+Completed 200 OK in 80ms (Views: 26.9ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/assets/scaffold.css" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /scaffold.css - 404 Not Found (2ms)
+
+ActionController::RoutingError (No route matches [GET] "/assets/scaffold.css"):
+  
+
+Rendered /Users/mark/.rvm/gems/ruby-1.9.2-p290/gems/actionpack-3.1.0.rc8/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.5ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/depot.css?body=1" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /depot.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/line_items.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /line_items.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/carts.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /carts.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/products.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /products.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/orders.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /orders.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/store.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /store.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /application.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/logo.png" for 127.0.0.1 at 2011-10-25 16:12:49 +0100
+Served asset /logo.png - 304 Not Modified (0ms)
